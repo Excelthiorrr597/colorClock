@@ -23,12 +23,4 @@ window.onload = function() {
 
 
 
-
-
-
-
-
-
-
-
 }
