@@ -1,13 +1,14 @@
 window.onload = function() {
 
-	var timeStamp = document.getElementById('clock')
-	var	backgroundColor = document.getElementById('clockContainer')
-	
-	var	color1 = getRandomColor()
-	var color2 = getRandomColor()
+	var timeStamp = $('#clock')[0],
+		backgroundColor = $('#clockContainer')[0],	
+		color1 = getRandomColor(),
+		color2 = getRandomColor(),
+		hexValue = $('#hexValue')[0],
+		whiteLine = $('#whiteLine')[0]
+		var width = new Date().getSeconds() * 5
 
-	backgroundColor.style.cssText = 'background: radial-gradient(circle,' +color1+',' +color2 + ');'
-
+	backgroundColor.style.background = 'radial-gradient(circle,' + color1 + ',' + color2 + ')'
 
 	var getTime = function(){
 
@@ -21,7 +22,7 @@ window.onload = function() {
 
 		var currentTime = hours + ':' + minutes + ':' + seconds
 
-		timeStamp.innerText = currentTime
+		timeStamp.innerHTML = currentTime
 
 	}
 
@@ -34,30 +35,50 @@ window.onload = function() {
 	    return color;
 	}
 
+		var color3 = color1
+		var color4 = color2
+
 	function changeBgColor() {
+
 		var c1change = color1[1] + color1[2] + color1[3] + color1[4] + color1[5] + color1[6]
 		var c2change = color2[1] + color2[2] + color2[3] + color2[4] + color2[5] + color2[6]
 
-		c1change = parseInt(c1change, 16) + 10
-		c2change = parseInt(c2change, 16) + 10
+		c1change = parseInt(c1change, 16) + 20
+		c2change = parseInt(c2change, 16) + 20
 
 		c1change = c1change.toString(16)
 		c2change = c2change.toString(16)
 
-		backgroundColor.style.background = 'radial-gradient(circle,' + '#' + c1change + ',' + '#' + c2change + ');'
+		color1 = '#' + c1change
+		color2 = '#' + c2change
+
+		backgroundColor.style.background = 'radial-gradient(circle,' + color1 + ',' + color2 + ')'
+		
 	}
 
-
-
-	getTime()
-	setInterval(getTime, 1000)
-	setInterval(changeBgColor, 1000)
-
-	timeStamp.onmouseover = function() {
-		this.innerHTML = color1[1] + color1[2] + ':' + color1[3] + color1[4] + ':' + color1[5] + color1[6]
+	function getHexVal() {
+		hexValue.innerHTML = color1[1] + color1[2] + ':' + color1[3] + color1[4] + ':' + color1[5] + color1[6]
 	}
 
-	timeStamp.onmouseout = getTime
+	function whiteLineChange() {
+
+		if (width < 300) width += 5
+
+		if (width >= 300) width = 0
+
+		whiteLine.style.width = width + 'px'
+		return width
+	}
+
+	function changeStuff() {
+		changeBgColor()
+		getTime()
+		getHexVal()
+		whiteLineChange()
+	}
+
+	setInterval(changeStuff, 1000)
+
 
 
 	
