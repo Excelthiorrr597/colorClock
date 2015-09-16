@@ -1,16 +1,19 @@
+body {
+	font-size: 36px;
+	max-height: 100%
+}
+
 #clockContainer {
-	background: radial-gradient(circle, #006400, #006499);
 	margin: 0 auto;
-	height: 500px;
-	width: 900px;
+	height: 810px;
 	position: relative;
 }
 
 #clock {
 	top: 50%;
-	left: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	color: #ffffff;
-	text-align: center;
 	position: absolute;
 }
 
